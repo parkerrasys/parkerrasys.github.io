@@ -1,2 +1,0 @@
-# parkerrasys.github.io
-Portfolio
