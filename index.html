@@ -1,222 +1,1053 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Portfolio" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/fa62c117c7.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="styles.css" />
-    <title>Parker Rasys</title>
-  </head>
-  <body class="light" id="top">
-    <header class="header center">
-      <h3>
-        <a href="https://rjshkhr.github.io/cleanfolio-minimal" class="link"
-          >PR.</a
-        >
-      </h3>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parker Rasys - Engineering Portfolio</title>
+  <style>
+    :root {
+      --bg-color: #0a1929;
+      --text-color: #e0e0e0;
+      --card-bg: #0f2942;
+      --accent-color: #2dd4bf;
+      --secondary-accent: #0ea5e9;
+      --grid-color: rgba(45, 212, 191, 0.1);
+      --blueprint-grid: rgba(14, 165, 233, 0.05);
+      --section-bg: rgba(15, 41, 66, 0.8);
+    }
 
-      <nav class="nav center">
-        <ul class="nav__list center">
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#projects">Projects</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#skills">Skills</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#contact">Contact</a>
-          </li>
-        </ul>
+    .light-mode {
+      --bg-color: #f0f9ff;
+      --text-color: #0f172a;
+      --card-bg: #ffffff;
+      --accent-color: #0891b2;
+      --secondary-accent: #0369a1;
+      --grid-color: rgba(8, 145, 178, 0.05);
+      --blueprint-grid: rgba(3, 105, 161, 0.03);
+      --section-bg: rgba(255, 255, 255, 0.85);
+    }
 
-        <button type="button" aria-label="toggle theme" class="btn btn--icon">
-          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-        </button>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Space Mono', 'Consolas', monospace;
+      transition: all 0.3s ease;
+    }
 
-        <button
-          type="button"
-          aria-label="toggle navigation"
-          class="btn btn--icon nav__hamburger"
-        >
-          <i aria-hidden="true" class="fas fa-bars"></i>
-        </button>
-      </nav>
-    </header>
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+      background-size: 20px 20px;
+      position: relative;
+    }
 
-    <main>
-      <!-- About -->
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Parker Rasys.</span></h1>
-        <h2 class="about__role">A CAD/Pre-Engineering Student.</h2>
-        <p class="about__desc">
-          Consectetur neque sed quam molestiae consectetur nesciunt sit alias
-          Vitae libero perferendis reprehenderit optio veritatis Accusantium at
-          voluptatum cumque temporibus et Explicabo iste porro quis numquam
-          distinctio Repellendus adipisci nam perferendis amet eaque hic
-          Voluptates
-        </p>
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        linear-gradient(var(--blueprint-grid) 2px, transparent 2px),
+        linear-gradient(90deg, var(--blueprint-grid) 2px, transparent 2px);
+      background-size: 100px 100px;
+      z-index: -1;
+    }
 
-        <div class="about__contact center">
-          <a href="https://example.com">
-            <span class="btn btn--outline">Resume</span>
-          </a>
+    header {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--accent-color);
+      background-color: var(--section-bg);
+      backdrop-filter: blur(5px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
 
-          <a
-            href="https://github.com/rjshkhr"
-            aria-label="github"
-            class="link link--icon"
-          >
-            <i aria-hidden="true" class="fab fa-github"></i>
-          </a>
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
 
-          <a
-            href="https://linkedin.com/in/rjshkhr"
-            aria-label="linkedin"
-            class="link link--icon"
-          >
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
+    nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      position: relative;
+    }
 
-      <!-- Projects -->
-      <section id="projects" class="section projects">
-        <h2 class="section__title">Projects</h2>
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--accent-color);
+      transition: width 0.3s ease;
+    }
 
-        <div class="projects__grid">
-          <div class="project">
-            <h3>AutoGrid</h3>
-            <p class="project__description">
-              An easy to use autonomous builder for vex robotics using a grid based system with coordinates.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">C++</li>
-              <li class="project__stack-item">Vex Robotics</li>
-            </ul>
+    nav a:hover::after {
+      width: 100%;
+    }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+    .name-title {
+      display: flex;
+      flex-direction: column;
+    }
 
-          <div class="project">
-            <h3>Project 2</h3>
-            <p class="project__description">
-              Ipsum accusamus ea excepturi aliquid eligendi amet. Explicabo
-              sapiente debitis labore sed ipsam Mollitia repellat illum quod
-              unde beatae Quis
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">SASS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">React</li>
-            </ul>
+    .name-title h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+    .name-title h1::before {
+      content: '<';
+      color: var(--accent-color);
+      margin-right: 0.5rem;
+      opacity: 0.8;
+    }
 
-          <div class="project">
-            <h3>Project 3</h3>
-            <p class="project__description">
-              Ipsum accusamus ea excepturi aliquid eligendi amet. Explicabo
-              sapiente debitis labore sed ipsam Mollitia repellat illum quod
-              unde beatae Quis
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">SASS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">React</li>
-            </ul>
+    .name-title h1::after {
+      content: '/>';
+      color: var(--accent-color);
+      margin-left: 0.5rem;
+      opacity: 0.8;
+    }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://example.com"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+    .name-title p {
+      color: var(--secondary-accent);
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+    }
 
-      <!-- Skills -->
-      <section class="section skills" id="skills">
-        <h2 class="section__title">Skills</h2>
-        <ul class="skills__list">
-          <li class="skills__list-item btn btn--plain">CAD/Pre-Engineering</li>
-          <li class="skills__list-item btn btn--plain">Robotics</li>
-          <li class="skills__list-item btn btn--plain">C++</li>
-          <li class="skills__list-item btn btn--plain">Solidworks</li>
-          <li class="skills__list-item btn btn--plain">Autocad</li>
-        </ul>
-      </section>
+    .mode-toggle {
+      background: none;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Space Mono', 'Consolas', monospace;
+    }
 
-      <!-- Contact -->
-      <section class="section contact center" id="contact">
-        <h2 class="section__title">Contact</h2>
-        <a href="mailto:parker.rasys@gmail.com">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section>
-    </main>
+    .mode-toggle:hover {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
 
-    <footer class="footer">
-      <a
-        href="https://github.com/rjshkhr/cleanfolio-minimal"
-        class="link footer__link"
-      >
-        Created By Parker Rasys
-      </a>
-    </footer>
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
 
-    <div class="scroll-container">
-      <div class="scroll-top">
-        <a aria-label="Scroll up" href="#top">
-          <i aria-hidden="true" class="fas fa-arrow-up"></i>
-        </a>
-      </div>
+    section {
+      margin-bottom: 4rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      position: relative;
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      font-weight: 700;
+    }
+
+    .section-title::before {
+      content: '# ';
+      color: var(--accent-color);
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-color);
+    }
+
+    .about-me {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      background-color: var(--section-bg);
+      border-radius: 8px;
+      padding: 2rem;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .profile-image {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .profile-image img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 2px solid var(--accent-color);
+    }
+
+    .profile-image::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: 10px;
+      bottom: 10px;
+      border: 2px solid var(--accent-color);
+      border-radius: 8px;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .about-content p {
+      line-height: 1.8;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .skills {
+      margin-top: 1.5rem;
+    }
+
+    .skills h3 {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .skill-tag {
+      background-color: rgba(45, 212, 191, 0.1);
+      color: var(--accent-color);
+      padding: 0.4rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      border: 1px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-tag:before {
+      content: '#';
+      opacity: 0.6;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      position: relative;
+      height: 400px;
+      perspective: 1000px;
+      cursor: pointer;
+      border-top: 2px solid var(--accent-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, var(--grid-color));
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    .card-content {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .project-card:hover .card-content {
+      transform: rotateY(10deg) rotateX(5deg);
+    }
+
+    .project-card .thumbnail {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+      height: calc(100% - 180px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-info h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+
+    .project-info p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: auto;
+    }
+
+    .project-link {
+      padding: 0.5rem 1rem;
+      background-color: rgba(45, 212, 191, 0.1);
+      color: var(--accent-color);
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+      border: 1px solid var(--accent-color);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-link:hover {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      background-color: var(--blueprint-grid);
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .contact {
+      background-color: var(--section-bg);
+      border-radius: 8px;
+      padding: 2rem;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(45, 212, 191, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+    }
+
+    .contact-text {
+      font-size: 0.9rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .circuit-decoration {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.1;
+    }
+
+    .circuit-line {
+      position: absolute;
+      background-color: var(--accent-color);
+    }
+
+    .circuit-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+    }
+
+    footer {
+      margin-top: 4rem;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--grid-color);
+      font-size: 0.9rem;
+      opacity: 0.8;
+      background-color: var(--section-bg);
+      backdrop-filter: blur(5px);
+    }
+
+    @media (max-width: 768px) {
+      .about-me {
+        grid-template-columns: 1fr;
+      }
+      
+      .projects {
+        grid-template-columns: 1fr;
+      }
+      
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        align-items: flex-start;
+      }
+      
+      nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="circuit-decoration" id="circuit-decoration"></div>
+
+  <header>
+    <div class="name-title">
+      <h1>Parker Rasys</h1>
+      <p>CAD Pre-Engineering Student</p>
     </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="mode-toggle">
+        <span class="mode-icon">🌙</span>
+        <span class="mode-text">Light Mode</span>
+      </button>
+    </nav>
+  </header>
 
-    <script src="./script.js"></script>
-  </body>
+  <div class="container">
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-me">
+        <div class="profile-image">
+          <img src="/api/placeholder/400/500" alt="Parker Rasys">
+        </div>
+        <div class="about-content">
+          <p>Hello! I'm Parker Rasys, a passionate CAD pre-engineering student with a focus on robotics and mechanical engineering. I'm fascinated by the intersection of design, automation, and practical problem-solving.</p>
+          
+          <p>Currently, I'm currently studying CAD/Pre-Engineering at Pathfinder Tech with plans to specialize in Robotics or Mechanical engineering. I enjoy challenging projects that require creative thinking and precision design, particularly ones that have real-world applications. When I'm not designing in CAD software, you can find me participating in robotics competitions or tinkering with Raspberry PI based projects!</p>
+          
+          <div class="skills">
+            <h3>Technical Skills</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">AutoCAD</span>
+              <span class="skill-tag">3D Printing</span>
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">Mechanical Design</span>
+              <span class="skill-tag">Robotics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects">
+        <div class="project-card">
+          <div class="card-content">
+            <div class="project-info">
+              <h3>IDK</h3>
+              <p>TBD</p>
+              <div class="tech-stack">
+                <span class="tech-tag">SolidWorks</span>
+                <span class="tech-tag">Arduino</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">GitHub Repo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="project-card">
+          <div class="card-content">
+            <img src="/api/placeholder/400/320" alt="Robotic Arm Design" class="thumbnail">
+            <div class="project-info">
+              <h3>Robotic Arm Design</h3>
+              <p>3-axis articulated robotic arm with custom servo control system designed for desktop manufacturing applications.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">SolidWorks</span>
+                <span class="tech-tag">3D Printing</span>
+                <span class="tech-tag">Arduino</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">CAD Files</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-content">
+            <img src="/api/placeholder/400/320" alt="Drone Frame Optimization" class="thumbnail">
+            <div class="project-info">
+              <h3>Drone Frame Optimization</h3>
+              <p>Lightweight drone frame design with improved aerodynamics and vibration dampening features for extended flight time.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">Fusion 360</span>
+                <span class="tech-tag">FEA</span>
+                <span class="tech-tag">Composites</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">Documentation</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-content">
+            <img src="/api/placeholder/400/320" alt="Electric Longboard Drive" class="thumbnail">
+            <div class="project-info">
+              <h3>Electric Longboard Drive</h3>
+              <p>Custom-designed electric drivetrain for a longboard with regenerative braking and modular battery system for urban commuting.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">AutoCAD</span>
+                <span class="tech-tag">Power Systems</span>
+                <span class="tech-tag">CNC Machining</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">Build Log</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-content">
+            <img src="/api/placeholder/400/320" alt="Automated Plant Care System" class="thumbnail">
+            <div class="project-info">
+              <h3>Automated Plant Care System</h3>
+              <p>Smart plant watering and monitoring system with soil moisture sensors and automated water delivery controlled via mobile app.</p>
+              <div class="tech-stack">
+                <span class="tech-tag">TinkerCAD</span>
+                <span class="tech-tag">IoT</span>
+                <span class="tech-tag">Sensors</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">Schematics</a>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+        <div class="project-card">
+          <div class="card-content">
+            <div class="project-info">
+              <h3>IDK</h3>
+              <p>TBH</p>
+              <div class="tech-stack">
+                <span class="tech-tag">CATIA</span>
+                <span class="tech-tag">Motion Analysis</span>
+                <span class="tech-tag">Robotics</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link">View Details</a>
+                <a href="#" class="project-link">Project Files</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact">
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="contact-icon">GM</div>
+            <div class="contact-text">parker.rasys@gmail.com</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">GH</div>
+            <div class="contact-text">github.com/parkerrasys</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">LI</div>
+            <div class="contact-text">linkedin.com/in/parkerrasys</div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="contact-info">
+      <span>Parker Rasys | CAD/Pre-Engineering Student</span>
+    </div>
+  </footer>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.project-card');
+  const modeToggle = document.querySelector('.mode-toggle');
+  const modeIcon = document.querySelector('.mode-icon');
+  const modeText = document.querySelector('.mode-text');
+  const circuitDecoration = document.getElementById('circuit-decoration');
+  
+  // Prevent text selection on double-click and drag
+  document.addEventListener('mousedown', function(e) {
+    // Check if double click
+    if (e.detail > 1) {
+      e.preventDefault();
+    }
+  });
+  
+  // Prevent text selection globally when dragging
+  document.body.style.userSelect = 'none';
+  document.body.style.webkitUserSelect = 'none';
+  document.body.style.msUserSelect = 'none';
+  document.body.style.mozUserSelect = 'none';
+  
+  // Enable text selection for specific elements that need it
+  const textElements = document.querySelectorAll('input, textarea, [contenteditable="true"]');
+  textElements.forEach(el => {
+    el.style.userSelect = 'text';
+    el.style.webkitUserSelect = 'text';
+    el.style.msUserSelect = 'text';
+    el.style.mozUserSelect = 'text';
+  });
+  
+  // Particles system
+  const createParticlesSystem = () => {
+    circuitDecoration.innerHTML = '';
+    
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '-2';
+    circuitDecoration.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Make canvas full screen and handle resize
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Particle class
+    class Particle {
+      constructor(x = null, y = null, size = null) {
+        this.x = x !== null ? x : Math.random() * canvas.width;
+        this.y = y !== null ? y : Math.random() * canvas.height;
+        this.size = size !== null ? size : Math.random() * 3 + 2; // Larger size
+        this.baseSize = this.size;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.speedY = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.5 + 0.5; // Random initial opacity
+        this.fadeDirection = Math.random() > 0.5 ? 0.005 : -0.005; // Random fade direction
+      }
+      
+      update(mouseDown, mouse) {
+        // Move particle
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        // Bounce off edges
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        
+        // Periodic fade in/out effect
+        this.opacity += this.fadeDirection;
+        
+        // Change fade direction when limits reached
+        if (this.opacity <= 0.3 || this.opacity >= 1) {
+          this.fadeDirection *= -1;
+        }
+        
+        // Mouse attraction when mouse button is down
+        if (mouseDown && mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            const attractionForce = 0.05;
+            this.x += (dx / distance) * attractionForce * (mouse.radius - distance) / 2;
+            this.y += (dy / distance) * attractionForce * (mouse.radius - distance) / 2;
+            
+            // Grow particles when being attracted
+            this.size = this.baseSize + ((mouse.radius - distance) / mouse.radius) * 3;
+          } else {
+            // Return to base size
+            if (this.size > this.baseSize) {
+              this.size -= 0.1;
+            }
+          }
+        } else {
+          // Return to base size
+          if (this.size > this.baseSize) {
+            this.size -= 0.1;
+          }
+        }
+      }
+      
+      draw() {
+        // Get accent color from CSS variable
+        const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+        ctx.fillStyle = accentColor;
+        ctx.globalAlpha = this.opacity;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+    
+    // Mouse position and state
+    let mouse = {
+      x: null,
+      y: null,
+      radius: 150,
+      isDown: false
+    };
+    
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.x;
+      mouse.y = e.y;
+    });
+    
+    window.addEventListener('mousedown', () => {
+      mouse.isDown = true;
+    });
+    
+    window.addEventListener('mouseup', (e) => {
+      if (mouse.isDown) {
+        // Create burst effect on mouse up
+        createBurst(e.x, e.y);
+      }
+      mouse.isDown = false;
+    });
+    
+    // Create burst effect
+    function createBurst(x, y) {
+      // Count particles near the mouse
+      let nearbyParticles = 0;
+      particlesArray.forEach(p => {
+        const dx = p.x - x;
+        const dy = p.y - y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < mouse.radius) nearbyParticles++;
+      });
+      
+      // Create new particles based on how many were attracted
+      const newParticlesCount = Math.min(20, Math.max(5, nearbyParticles / 2));
+      
+      for (let i = 0; i < newParticlesCount; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 2 + 1;
+        const newParticle = new Particle(
+          x, 
+          y, 
+          Math.random() * 3 + 2
+        );
+        
+        // Set speed direction outward from burst point
+        newParticle.speedX = Math.cos(angle) * speed;
+        newParticle.speedY = Math.sin(angle) * speed;
+        
+        particlesArray.push(newParticle);
+      }
+      
+      // Limit max particles
+      if (particlesArray.length > maxParticles) {
+        particlesArray.splice(0, particlesArray.length - maxParticles);
+      }
+    }
+    
+    // Create particles
+    const particlesArray = [];
+    const particleCount = Math.min(80, Math.floor(window.innerWidth * window.innerHeight / 12000));
+    const maxParticles = particleCount * 1.5;
+    
+    for (let i = 0; i < particleCount; i++) {
+      particlesArray.push(new Particle());
+    }
+    
+    // Randomly replace particles
+    setInterval(() => {
+      if (particlesArray.length > 10) {
+        const index = Math.floor(Math.random() * particlesArray.length);
+        particlesArray.splice(index, 1);
+        particlesArray.push(new Particle());
+      }
+    }, 2000);
+    
+    // Animation function
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update(mouse.isDown, mouse);
+        particlesArray[i].draw();
+        
+        // Check for connections between particles
+        for (let j = i + 1; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          const maxDistance = 120; // Increased connection distance
+          
+          if (distance < maxDistance) {
+            // Calculate opacity based on distance
+            const opacity = 1 - (distance / maxDistance);
+            const accentColor = getComputedStyle(document.body).getPropertyValue('--accent-color');
+            
+            // Get RGB values from hex color
+            let r, g, b;
+            if (accentColor.startsWith('#')) {
+              r = parseInt(accentColor.slice(1, 3), 16);
+              g = parseInt(accentColor.slice(3, 5), 16);
+              b = parseInt(accentColor.slice(5, 7), 16);
+            } else {
+              // Default values if there's an issue parsing
+              r = 45; g = 212; b = 191;
+            }
+            
+            // Draw thicker line with higher opacity
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${opacity * 0.8})`;
+            ctx.lineWidth = 1.2; // Thicker line
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+        
+        // Mouse repulsion when not holding down
+        if (!mouse.isDown && mouse.x !== null && mouse.y !== null) {
+          const dx = particlesArray[i].x - mouse.x;
+          const dy = particlesArray[i].y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < mouse.radius) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (mouse.radius - distance) / mouse.radius;
+            
+            particlesArray[i].x += forceDirectionX * force * 1.5;
+            particlesArray[i].y += forceDirectionY * force * 1.5;
+          }
+        }
+      }
+      
+      // Draw attraction effect when mouse is down
+      if (mouse.isDown && mouse.x !== null && mouse.y !== null) {
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent-color');
+        ctx.fill();
+        
+        // Draw attraction radius
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue('--accent-color') + '40';
+        ctx.stroke();
+      }
+    }
+    
+    animate();
+  };
+  
+  // Initialize particles system
+  createParticlesSystem();
+  
+  // Card hover tilt effect
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const xRotation = ((y - rect.height / 2) / rect.height) * 10;
+      const yRotation = ((x - rect.width / 2) / rect.width) * -10;
+      
+      card.querySelector('.card-content').style.transform = `rotateX(${xRotation}deg) rotateY(${yRotation}deg)`;
+      
+      // Add a subtle glow effect
+      card.style.boxShadow = `
+        0 8px 32px rgba(0,0,0,0.3),
+        ${x / 30}px ${y / 30}px 30px rgba(45, 212, 191, 0.2)
+      `;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.querySelector('.card-content').style.transform = 'rotateX(0) rotateY(0)';
+      card.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+    });
+  });
+  
+  // Dark/Light mode toggle
+  modeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    
+    if (document.body.classList.contains('light-mode')) {
+      modeIcon.textContent = '☀️';
+      modeText.textContent = 'Dark Mode';
+    } else {
+      modeIcon.textContent = '🌙';
+      modeText.textContent = 'Light Mode';
+    }
+  });
+  
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+});
+
+document.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+  return false;
+}, true);
+  </script>
+</body>
 </html>
